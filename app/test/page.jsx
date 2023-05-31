@@ -5,12 +5,13 @@ const formInitial = {
     acts: "",
     host: "",
     ipAd: "",
-    json_files: "",
-    json_hash: "",
-    json_params: ""
+    id: "",
+    action: "",
+    path: "",
+    params:""
 }
 
-const URL = "";
+const URL = "http://localhost:8080/api/v1/niam";
 
 export default function Test() {
     const [formInputs, setFormInputs] = useState(formInitial)
@@ -23,8 +24,20 @@ export default function Test() {
 
     const submitForm = async (data) => {
         try {
-            
-            let submitData = await axios.post(`${URL}`, data, { withCredentials: true })
+            const submitData = {
+                host: data.host,
+                acts: data.acts,
+                ipAd: data.ipAd,
+                json_files:[
+                    {
+                        id: data.id,
+                        action: data.action,
+                        path: data.path,
+                        params: data.params
+                    }
+                ]
+            }
+            let postData = await axios.post(`${URL}`, submitData, { withCredentials: true })
         } catch (err) {
             console.log("Can't submit");
         }
@@ -39,7 +52,6 @@ export default function Test() {
                     <div className="card">
                         <div className="card-header align-items-center d-flex">
                             <h4 className="card-title mb-0 flex-grow-1">Input Example</h4>
-
                         </div>
                         {/* end card header */}
                         <div className="card-body">
@@ -97,14 +109,14 @@ export default function Test() {
                                     <div className="col-xxl-3 col-md-6">
                                         <div>
                                             <label htmlFor="placeholderInput" className="form-label">
-                                                Json files
+                                                Json files' object ID
                                             </label>
                                             <input
-                                                name="json_files"
+                                                name="id"
                                                 type="text"
                                                 className="form-control"
-                                                id="placeholderInput"
-                                                placeholder="json_files"
+                                                id="id"
+                                                placeholder="id"
                                                 onChange={(e) => onSignInChange(e)}
                                             />
                                         </div>
@@ -113,14 +125,14 @@ export default function Test() {
                                     <div className="col-xxl-3 col-md-6">
                                         <div>
                                             <label htmlFor="placeholderInput" className="form-label">
-                                                Json hash
+                                                Action
                                             </label>
                                             <input
-                                                name="json_hash"
+                                                name="action"
                                                 type="text"
                                                 className="form-control"
                                                 id="placeholderInput"
-                                                placeholder="json_hash"
+                                                placeholder="action"
                                                 onChange={(e) => onSignInChange(e)}
                                             />
                                         </div>
@@ -129,14 +141,30 @@ export default function Test() {
                                     <div className="col-xxl-3 col-md-6">
                                         <div>
                                             <label htmlFor="placeholderInput" className="form-label">
-                                                Json params
+                                                Path
                                             </label>
                                             <input
-                                                name="json_params"
+                                                name="path"
                                                 type="text"
                                                 className="form-control"
                                                 id="placeholderInput"
-                                                placeholder="json_files"
+                                                placeholder="path"
+                                                onChange={(e) => onSignInChange(e)}
+                                            />
+                                        </div>
+                                    </div>
+                                     {/*end col*/}
+                                     <div className="col-xxl-3 col-md-6">
+                                        <div>
+                                            <label htmlFor="placeholderInput" className="form-label">
+                                                Param
+                                            </label>
+                                            <input
+                                                name="param"
+                                                type="text"
+                                                className="form-control"
+                                                id="placeholderInput"
+                                                placeholder="param"
                                                 onChange={(e) => onSignInChange(e)}
                                             />
                                         </div>
@@ -145,7 +173,7 @@ export default function Test() {
 
 
                                 </div>
-                                <button type="button" className="btn btn-primary btn-animation waves-effect waves-light mt-3" onClick={postForm} data-text="Primary"><span>Submit Data</span></button>
+                                <button type="button" className="btn btn-primary btn-animation waves-effect waves-light mt-3" onClick={postForm} data-text="Submit"><span>Submit Data</span></button>
                             </div>
                         </div>
                     </div>

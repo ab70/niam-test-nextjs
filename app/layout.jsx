@@ -14,8 +14,8 @@ export default function RootLayout({ children }) {
       `/assets/libs/feather-icons/feather.min.js`,
       `/assets/js/pages/plugins/lord-icon-2.1.0.js`,
       `/assets/js/plugins.js`,
-      `/assets/libs/particles.js/particles.js`,
-      `/assets/js/pages/particles.app.js`,
+      // `/assets/libs/particles.js/particles.js`,
+      // `/assets/js/pages/particles.app.js`,
       `/assets/js/pages/password-addon.init.js`,
     ]
     
