@@ -37,7 +37,12 @@ export default function Test() {
                     }
                 ]
             }
-            let postData = await axios.post(`${URL}`, submitData, { withCredentials: true })
+            let postData = await axios.post(`${URL}`, submitData, {
+                withCredentials: true,
+                headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded',
+                }
+              });
         } catch (err) {
             console.log("Can't submit");
         }
