@@ -8,10 +8,10 @@ const formInitial = {
     id: "",
     action: "",
     path: "",
-    params:""
+    params: ""
 }
 
-const URL = "http://localhost:8080/api/v1/niam";
+const URL = "http://127.0.0.1:8080/api/v1/niam";
 
 export default function Test() {
     const [formInputs, setFormInputs] = useState(formInitial)
@@ -28,7 +28,7 @@ export default function Test() {
                 host: data.host,
                 acts: data.acts,
                 ipAd: data.ipAd,
-                json_files:[
+                json_files: [
                     {
                         id: data.id,
                         action: data.action,
@@ -38,16 +38,17 @@ export default function Test() {
                 ]
             }
             let postData = await axios.post(`${URL}`, submitData, {
-                withCredentials: true,
                 headers: {
-                  'Content-Type': 'application/x-www-form-urlencoded',
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Access-Control-Allow-Origin': 'http://localhost:8080',
+                    
                 }
-              });
+            });
         } catch (err) {
             console.log("Can't submit");
         }
     }
-    const postForm = async ()=>{
+    const postForm = async () => {
         let resReturn = await submitForm(formInputs)
     }
     return (
@@ -158,8 +159,8 @@ export default function Test() {
                                             />
                                         </div>
                                     </div>
-                                     {/*end col*/}
-                                     <div className="col-xxl-3 col-md-6">
+                                    {/*end col*/}
+                                    <div className="col-xxl-3 col-md-6">
                                         <div>
                                             <label htmlFor="placeholderInput" className="form-label">
                                                 Param
