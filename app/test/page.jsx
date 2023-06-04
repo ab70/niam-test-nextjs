@@ -11,7 +11,7 @@ const formInitial = {
     params: ""
 }
 
-const URL = "http://127.0.0.1:8080/api/v1/niam";
+const URL = "http://localhost:4000/api/test";
 
 export default function Test() {
     const [formInputs, setFormInputs] = useState(formInitial)
@@ -34,15 +34,17 @@ export default function Test() {
                         action: data.action,
                         path: data.path,
                         params: data.params
+                    },
+                    {
+                        id: data.id,
+                        action: data.action,
+                        path: data.path,
+                        params: data.params
                     }
                 ]
             }
-            let postData = await axios.post(`${URL}`, submitData, {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Access-Control-Allow-Origin': 'http://localhost:8080',
-                    
-                }
+            let postData = await axios.post(`${URL}`,JSON.stringify(submitData) , {
+                
             });
         } catch (err) {
             console.log("Can't submit");
